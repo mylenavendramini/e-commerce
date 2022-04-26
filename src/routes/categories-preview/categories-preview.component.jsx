@@ -1,0 +1,22 @@
+// import SHOP_DATA from "../../shop-data.json";
+// instead of using like this, I want to get the data from firebase, so:
+import { useContext, Fragment } from "react";
+import { CategoriesContext } from "../../components/context/categories.context";
+import CategoryPreview from "../../components/category-preview/category-preview.component";
+
+const CategoriesPreview = () => {
+  //give me the categories from useContext passing in the product context:
+  const { categoriesMap } = useContext(CategoriesContext);
+  return (
+    <Fragment>
+      {Object.keys(categoriesMap).map((title) => {
+        const products = categoriesMap[title];
+        return (
+          <CategoryPreview key={title} title={title} products={products} />
+        );
+      })}
+    </Fragment>
+  );
+};
+
+export default CategoriesPreview;
