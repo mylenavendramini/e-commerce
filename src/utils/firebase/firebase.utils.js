@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
@@ -33,7 +32,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const firebaseapp = initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
@@ -51,7 +50,11 @@ export const db = getFirestore();
 // Here I'm going to walk through creating a method that allows us to upload these categories from that SHOP_DATA up into the respective collections up in Firestore:
 
 // Im adding collections from FireStore and the documents inside the collections:
-export const addColectionAndDocuments = async (collectionKey, objectsToAdd) => {
+export const addColectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd,
+  field
+) => {
   // Passing in db because we're saying, Hey, go with our db instance, this is exactly we're doing with fireStore. And them what specific collectionKey are you looking for? collectionKey
   const collectionRef = collection(db, collectionKey);
   // How to store each of these objects (objectsToAdd) inside of this new collectionRef as a new document?
@@ -73,13 +76,8 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-
-  return categoryMap;
+  // Give us the categories as an array:
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
 
 export const createUserDocumentFromAuth = async (
@@ -112,11 +110,13 @@ export const createUserDocumentFromAuth = async (
     }
   }
 
-  // if the user data exist, return userDocRf
-  return userDocRef;
+  // if the user data exist, return userDocRef
+  // with thunk: return userDocRef;
+  // with saga, we want the snapshot, because the data lives on the snapshot. The docRef is just a pointer to that space where that data could live. We want the snapshot now so that we can get the data and store it inside of our reducer.
+  return userSnapshot;
 };
 
-export const createAuthUserWithEamilAndPassword = async (email, password) => {
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
   // If I dont receive this arguments, dont run the function
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
@@ -129,7 +129,22 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 export const signOutUser = async () => await signOut(auth);
 
-export const onAuthStateChangedListener = (callback) => {
+export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
-  // the second paramether is a callback function I want to call every time the auth state changes
+// the second paramether is a callback function I want to call every time the auth state changes
+
+export const getCurrentUser = () => {
+  // convert from a observable listener into a promise based function call:
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        // We want to unsubscribe the moment we get a value.
+        unsubscribe();
+        // We want to resolve the moment we get the value.
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
 };
