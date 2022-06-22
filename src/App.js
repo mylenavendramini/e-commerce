@@ -9,6 +9,8 @@ import { Routes, Route } from "react-router-dom";
 //   getCurrentUser,
 // } from "./utils/firebase/firebase.utils";
 
+import "./App.css";
+
 import Home from "./routes/home/home.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Navigation from "./routes/navigation/navigation.component";

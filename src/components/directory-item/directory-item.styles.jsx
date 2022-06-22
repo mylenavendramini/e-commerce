@@ -66,7 +66,7 @@ export const DirectoryItemContainer = styled.div`
   overflow: hidden;
 
   &:hover {
-    cursor: pointer;
+    /* cursor: pointer; */
 
     & ${BackgroundImage} {
       transform: scale(1.1);

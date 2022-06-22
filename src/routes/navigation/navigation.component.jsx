@@ -8,7 +8,7 @@ import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
-import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
+import logo from "../../assets/MYSTORE-logo.png";
 // import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { signOutStart } from "../../store/user/user.action";
 
@@ -37,10 +37,20 @@ const Navigation = () => {
     <Fragment>
       <NavigationContainer>
         <LogoContainer to="/">
-          <CrwnLogo className="logo" />
+          <img
+            src={logo}
+            alt="Logo"
+            style={{
+              width: "100px",
+            }}
+          />
         </LogoContainer>
         <NavLinks>
-          <NavLink to="/shop">SHOP</NavLink>
+          <NavLink to="/shop">SALE</NavLink>
+          <NavLink to="/shop/hats">HATS</NavLink>
+          <NavLink to="/shop/bags">BAGS</NavLink>
+          <NavLink to="/shop/sunglasses">SUNGLASSES</NavLink>
+          <NavLink to="/shop/jackets">JACKETS</NavLink>
           {/* If theres an current user, I want to dont show sign-in anymore, but sign-out*/}
           {currentUser ? (
             <NavLink as="span" onClick={signOutUser}>

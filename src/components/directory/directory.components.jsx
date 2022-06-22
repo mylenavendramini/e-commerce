@@ -1,4 +1,4 @@
-import Gallery from "../carousel/carousel";
+// import Gallery from "../carousel/carousel";
 import DirectoryItem from "../directory-item/directory-item.component";
 
 import { DirectoryContainerMain, DirectoryContainer } from "./directory.styles";
@@ -7,9 +7,9 @@ const main = [
   {
     id: 1,
     newCollectionTittle: "New Collection",
-    title: "Glasses",
+    title: "Sunglasses",
     imageUrl: "https://i.ibb.co/q0LYg8Q/glasses.png",
-    route: "shop/glasses",
+    route: "shop/sunglasses",
   },
 ];
 // Variable that contains objects that reflects the 6 category-container divs:
