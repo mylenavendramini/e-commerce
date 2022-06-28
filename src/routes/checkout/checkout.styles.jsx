@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const CheckoutContainer = styled.div`
-  width: 55%;
-  min-height: 90vh;
+  /* width: 55%; */
+  width: 90%;
+  /* min-height: 90vh; */
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,16 +15,21 @@ export const CheckoutHeader = styled.div`
   width: 100%;
   padding: 10px 0;
   display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid darkgrey;
+  justify-content: space-around;
+  border-bottom: 1px solid lightgray;
 `;
 
 export const HeaderBlock = styled.div`
   text-transform: capitalize;
-  width: 23%;
+  /* width: 23%; */
+  width: 22%;
+
+  &:first-child {
+    width: 35%;
+  }
 
   &:last-child {
-    width: 8%;
+    width: 26%;
   }
 `;
 

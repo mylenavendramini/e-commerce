@@ -9,7 +9,6 @@ export const BackgroundImage = styled.div`
   background-position: center;
   /* opacity: 0.9; */
   filter: contrast(80%);
-  /* background-blend-mode: normal; */
   background-image: ${({ imageUrl }) => `url(${imageUrl})`};
 `;
 
@@ -30,7 +29,7 @@ export const Body = styled.div`
     font-weight: bold;
     margin-top: 0px;
     margin-bottom: 100px;
-    letter-spacing: 10px;
+    letter-spacing: 1rem;
     line-height: 1px;
     font-size: 45px;
     color: white;
@@ -41,7 +40,7 @@ export const Body = styled.div`
     font-weight: bold;
     margin: 0 6px 70px 0px;
     font-size: 22px;
-    letter-spacing: 2px;
+    letter-spacing: 0.5rem;
     /* color: #4a4a4a; */
     color: white;
     text-transform: uppercase;

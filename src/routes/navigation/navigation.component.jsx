@@ -1,5 +1,6 @@
-import { Fragment } from "react";
-import { Outlet } from "react-router-dom";
+import { Fragment, useState, useRef } from "react";
+import { useOnClickOutside } from "../../hooks";
+import { Link, Outlet } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import CartIcon from "../../components/cart-icon/cart-icon.component";
@@ -8,7 +9,23 @@ import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component
 import { selectIsCartOpen } from "../../store/cart/cart.selector";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
+import Suggestion from "../../components/suggestion/suggestion.component";
+
+import {
+  SearchContainer,
+  SearchOpen,
+  SearchClose,
+} from "../../components/search/search-icon.styles";
+
+import search from "../../assets/search-symbol.png";
+import close from "../../assets/close.png";
+
+import Burger from "../../components/burger/burger.component";
+import Menu from "../../components/menu/menu.component";
+
 import logo from "../../assets/MYSTORE-logo.png";
+import contact from "../../assets/contact.png";
+
 // import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { signOutStart } from "../../store/user/user.action";
 
@@ -17,21 +34,39 @@ import {
   LogoContainer,
   NavLinks,
   NavLink,
+  ThreeItemsContainer,
 } from "./navigation.styles";
 
 const Navigation = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector(selectCurrentUser);
+
+  const [isSearchSuggestionOpen, setIsSearchSuggestionOpen] = useState(false);
+
+  const openSearchSuggestion = () => {
+    setIsSearchSuggestionOpen(!isSearchSuggestionOpen);
+  };
+
+  // to close the search-suggestion when click outside:
+
+  // const ref = useRef();
+  // useOutsideClick(ref, () => {
+  //   setIsSearchSuggestionOpen(false);
+  // });
+
+  const node = useRef();
+  useOnClickOutside(node, () => {
+    setIsBurgerOpen(false);
+  });
+
+  // const ref = useRef();
+  // useOnClickOutside(ref, () => setIsSearchSuggestionOpen(false));
+
   const isCartOpen = useSelector(selectIsCartOpen);
 
   const signOutUser = () => dispatch(signOutStart());
 
-  // const { currentUser } = useContext(UserContext);
-  // I call the useContext on the UserContext, like I did in sign-in-form when I was pulling the setter functiom, but here I want the actual value of the currentUser
-  // console.log(currentUser);
-  // When I sign in with some user name, what should happen is that our sign-in-form sign in, gets the response, destruction as the user, stores it into our context. But then what should happen is that it should log from our navigation component. The fact that we logged it means that our functional component was re rendered and this is because useContext as a hook tells this component Oh, whenever a value inside of this context updates re render me.
-  // So what's happening here is that because we're leveraging this currentUser value, we are saying, Oh, I want you to run my functional component again and re render me because this value inside of the userContext.jsx has updated and the reason why this triggers is because of useState (in userContext.jsx) being called with the setter function.
-  // const { isCartOpen } = useContext(CartContext);
+  const [isBurgerOpen, setIsBurgerOpen] = useState(false);
 
   return (
     <Fragment>
@@ -51,17 +86,56 @@ const Navigation = () => {
           <NavLink to="/shop/bags">BAGS</NavLink>
           <NavLink to="/shop/sunglasses">SUNGLASSES</NavLink>
           <NavLink to="/shop/jackets">JACKETS</NavLink>
+        </NavLinks>
+
+        <ThreeItemsContainer>
           {/* If theres an current user, I want to dont show sign-in anymore, but sign-out*/}
           {currentUser ? (
-            <NavLink as="span" onClick={signOutUser}>
-              SIGN OUT
-            </NavLink>
+            <span onClick={signOutUser}>SING OUT</span>
           ) : (
-            <NavLink to="/auth">SIGN IN</NavLink>
+            <Link to="/auth">
+              <img
+                src={contact}
+                alt="Contact"
+                style={{
+                  width: "20px",
+                }}
+              />
+            </Link>
           )}
+
+          <SearchContainer onClick={openSearchSuggestion}>
+            {isSearchSuggestionOpen ? (
+              <SearchClose
+                src={close}
+                alt="close"
+                style={{
+                  width: "20px",
+                }}
+              />
+            ) : (
+              <SearchOpen
+                src={search}
+                alt="search"
+                style={{
+                  width: "20px",
+                }}
+              />
+            )}
+          </SearchContainer>
+          {isSearchSuggestionOpen && <Suggestion />}
+
           <CartIcon />
-        </NavLinks>
-        {isCartOpen && <CartDropDown />}
+          {isCartOpen && <CartDropDown />}
+        </ThreeItemsContainer>
+
+        <div ref={node}>
+          <Burger
+            isBurgerOpen={isBurgerOpen}
+            setIsBurgerOpen={setIsBurgerOpen}
+          />
+          <Menu isBurgerOpen={isBurgerOpen} setIsBurgerOpen={setIsBurgerOpen} />
+        </div>
       </NavigationContainer>
       {/* This next Outlet is because of path index - element Home */}
       <Outlet />

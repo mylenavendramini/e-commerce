@@ -10,7 +10,7 @@ import {
   selectCategoriesMap,
 } from "../../store/categories/categories.selector";
 
-import { Title, CategoryContainer } from "./category.styles";
+import { CategoryContainer } from "./category.styles";
 
 const Category = () => {
   const { category } = useParams();
@@ -25,7 +25,7 @@ const Category = () => {
 
   return (
     <Fragment>
-      <Title>{category.toUpperCase()}</Title>
+      {/*<Title>{category.toUpperCase()}</Title>*/}
       {isLoading ? (
         <Spinner />
       ) : (

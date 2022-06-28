@@ -1,3 +1,6 @@
 :root {
-  --color-primary: black;
+  --black-primary: black;
+  --black-secondary: rgb(33, 33, 33);
+  --yellow-primary: #d0af39;
+  --yellow-secondary: #c5a73a;
 }

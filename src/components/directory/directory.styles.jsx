@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const DirectoryContainerMain = styled.div`
   width: 100%;
   display: grid;
-  padding: 20px 0 50px 0;
+  padding: 10px 0 50px 0;
   grid-template-columns: 1fr;
   row-gap: 50px;
   flex-wrap: wrap;

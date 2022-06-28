@@ -22,16 +22,17 @@ const ProductCard = ({ product }) => {
   return (
     <ProductCartContainer>
       <img src={imageUrl} alt={`${name}`} />
-      <Footer>
-        <Name>{name}</Name>
-        <Price>{price}</Price>
-      </Footer>
       <Button
         buttonType={BUTTON_TYPE_CLASSES.inverted}
         onClick={addProductToCart}
       >
-        Add to card
+        Add to shopping bag
       </Button>
+
+      <Footer>
+        <Name>{name}</Name>
+        <Price>${price}</Price>
+      </Footer>
     </ProductCartContainer>
   );
 };

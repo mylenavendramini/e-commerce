@@ -17,6 +17,10 @@ import {
   RemoveButton,
 } from "./checkout-item.styles";
 
+import clearItem from "../../assets/delete.png";
+import addItem from "../../assets/plus-symbol.png";
+import removeItem from "../../assets/minus-symbol.png";
+
 const CheckoutItem = ({ cartItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
   const dispatch = useDispatch();
@@ -35,12 +39,38 @@ const CheckoutItem = ({ cartItem }) => {
       </ImageContainer>
       <BaseSpan> {name} </BaseSpan>
       <Quantity>
-        <Arrow onClick={removeItemHandler}>&#10094;</Arrow>
+        <Arrow onClick={removeItemHandler}>
+          <img
+            src={removeItem}
+            alt="removeItem"
+            style={{
+              width: "10px",
+            }}
+          />
+        </Arrow>
         <Value>{quantity}</Value>
-        <Arrow onClick={addItemHandler}>&#10095;</Arrow>
+        <Arrow onClick={addItemHandler}>
+          <img
+            src={addItem}
+            alt="addItem"
+            style={{
+              width: "10px",
+            }}
+          />
+        </Arrow>
       </Quantity>
-      <BaseSpan> {price}</BaseSpan>
-      <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
+      <RemoveButton onClick={clearItemHandler}>
+        <img
+          src={clearItem}
+          alt="clearItem"
+          style={{
+            width: "15px",
+          }}
+        />
+      </RemoveButton>
+
+      <BaseSpan> ${price}</BaseSpan>
+      {/*<RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>*/}
     </CheckoutItemContainer>
   );
 };

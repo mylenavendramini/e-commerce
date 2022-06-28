@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ProductCartContainer = styled.div`
   width: 100%;
@@ -41,6 +41,7 @@ export const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+  padding: 0px 20px;
 `;
 
 export const Name = styled.span`

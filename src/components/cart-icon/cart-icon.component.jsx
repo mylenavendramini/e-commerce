@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 // to close the cart-dropdown when click outside
 import React, { useRef } from "react";
+// import { useOnClickOutside } from "../../hooks";
 import useOutsideClick from "../clickOutside/useOutsideClick";
 
 import {
@@ -30,24 +31,27 @@ const CartIcon = () => {
 
   // to close the cart-dropdown when click outside:
   const ref = useRef();
+
   useOutsideClick(ref, () => {
     dispatch(setIsCartOpen(false));
   });
 
   return (
-    <CartIconContainer onClick={toggleIsCartOpen} ref={ref}>
-      <ShoppingContainer>
-        <img
-          src={shoppingBag}
-          alt="shoppingBag"
-          style={{
-            width: "25px",
-          }}
-        />
-      </ShoppingContainer>
-      {/*The actual number(0) which is the count of items we have so far:*/}
-      <ItemCount>{cartCount}</ItemCount>
-    </CartIconContainer>
+    <div>
+      <CartIconContainer onClick={toggleIsCartOpen} ref={ref}>
+        <ShoppingContainer>
+          <img
+            src={shoppingBag}
+            alt="shoppingBag"
+            style={{
+              width: "25px",
+            }}
+          />
+        </ShoppingContainer>
+        {/*The actual number(0) which is the count of items we have so far:*/}
+        <ItemCount>{cartCount}</ItemCount>
+      </CartIconContainer>
+    </div>
   );
 };
 
