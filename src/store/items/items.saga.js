@@ -9,7 +9,7 @@ import { ITEMS_ACTION_TYPES } from "./items.types";
 export function* fetchItemsAsync() {
   try {
     // Anywhere you have a function and you want to turn it into an effect you essentially use the call() keyword.
-    const itemsArray = yield call(getProductsAndDocuments, "products");
+    const itemsArray = yield call(getProductsAndDocuments, "produtos");
     yield put(fetchItemsSuccess(itemsArray));
   } catch (error) {
     yield put(fetchItemsFailed(error));

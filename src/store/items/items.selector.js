@@ -9,8 +9,8 @@ export const selectItems = createSelector(
 
 export const selectItemsMap = createSelector([selectItems], (items) =>
   items.reduce((acc, item) => {
-    const { name, items } = item;
-    acc[name.toLowerCase().split(" ").join("")] = items;
+    const { title, items } = item;
+    acc[title.toLowerCase()] = items;
     return acc;
   }, {})
 );

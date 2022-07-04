@@ -8,6 +8,6 @@ import { cartReducer } from "./cart/cart.reducer";
 
 export const rootReducer = combineReducers({
   user: userReducer,
-  categories: categoriesReducer,
+  produtos: categoriesReducer,
   cart: cartReducer,
 });

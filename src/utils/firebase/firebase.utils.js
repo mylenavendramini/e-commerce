@@ -50,35 +50,35 @@ export const db = getFirestore();
 // Here I'm going to walk through creating a method that allows us to upload these categories from that SHOP_DATA up into the respective collections up in Firestore:
 
 // Im adding collections from FireStore and the documents inside the collections:
-export const addColectionAndDocuments = async (
-  collectionKey,
-  objectsToAdd,
-  field
-) => {
-  // Passing in db because we're saying, Hey, go with our db instance, this is exactly we're doing with fireStore. And them what specific collectionKey are you looking for? collectionKey
-  const collectionRef = collection(db, collectionKey);
-  // How to store each of these objects (objectsToAdd) inside of this new collectionRef as a new document?
-  const batch = writeBatch(db);
-  // Batch allows me to attach a bunch of different, writes, deletes, sets, whatever we can attach all of those to the batch and only when we're ready to fire off the batch does the actual transaction begin. So we need to create a bunch of set events.
-  objectsToAdd.forEach((object) => {
-    // this object is the category inside the SHOP_DATA
-    const docRef = doc(collectionRef, object.title.toLowerCase());
-    // I'm going to pass it the collectionRef and not db, because the collectionRef actually tells directly this doc method which database we're using, because we got this collection (collectionRef) from calling collection where the db was already passed.
-    batch.set(docRef, object);
-    // Here I want to batch.set on this docRef, because firebase will give us back a document reference, even if it doesn't exist yet, it will just point to that place for this specific key inside of our collection. And now we say Hey, set that location and set it with the value of the object itself. I can pass it some JSON object and it will build out that structure for me.
-  });
-  await batch.commit();
-  console.log("done");
-};
+// export const addColectionAndDocuments = async (
+//   collectionKey,
+//   objectsToAdd,
+//   field
+// ) => {
+//   // Passing in db because we're saying, Hey, go with our db instance, this is exactly we're doing with fireStore. And them what specific collectionKey are you looking for? collectionKey
+//   const collectionRef = collection(db, collectionKey);
+//   // How to store each of these objects (objectsToAdd) inside of this new collectionRef as a new document?
+//   const batch = writeBatch(db);
+//   // Batch allows me to attach a bunch of different, writes, deletes, sets, whatever we can attach all of those to the batch and only when we're ready to fire off the batch does the actual transaction begin. So we need to create a bunch of set events.
+//   objectsToAdd.forEach((object) => {
+//     // this object is the category inside the SHOP_DATA
+//     const docRef = doc(collectionRef, object.title.toLowerCase());
+//     // I'm going to pass it the collectionRef and not db, because the collectionRef actually tells directly this doc method which database we're using, because we got this collection (collectionRef) from calling collection where the db was already passed.
+//     batch.set(docRef, object);
+//     // Here I want to batch.set on this docRef, because firebase will give us back a document reference, even if it doesn't exist yet, it will just point to that place for this specific key inside of our collection. And now we say Hey, set that location and set it with the value of the object itself. I can pass it some JSON object and it will build out that structure for me.
+//   });
+//   await batch.commit();
+//   console.log("done");
+// };
 
-export const getCategoriesAndDocuments = async () => {
-  const collectionRef = collection(db, "categories");
-  const q = query(collectionRef);
+// export const getCategoriesAndDocuments = async () => {
+//   const collectionRef = collection(db, "categories");
+//   const q = query(collectionRef);
 
-  const querySnapshot = await getDocs(q);
-  // Give us the categories as an array:
-  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
-};
+//   const querySnapshot = await getDocs(q);
+//   // Give us the categories as an array:
+//   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
+// };
 
 export const createUserDocumentFromAuth = async (
   userAuth,
@@ -150,8 +150,7 @@ export const getCurrentUser = () => {
 };
 
 // Products:
-
-export const addColectionAndDocumentsProducts = async (
+export const addColectionAndDocuments = async (
   collectionKey,
   objectsToAdd,
   field
@@ -162,7 +161,7 @@ export const addColectionAndDocumentsProducts = async (
   const batch = writeBatch(db);
   // Batch allows me to attach a bunch of different, writes, deletes, sets, whatever we can attach all of those to the batch and only when we're ready to fire off the batch does the actual transaction begin. So we need to create a bunch of set events.
   objectsToAdd.forEach((object) => {
-    // this object is the product inside the PRODUCTS_DATA
+    // this object is the category inside the SHOP_DATA
     const docRef = doc(collectionRef, object.title.toLowerCase());
     // I'm going to pass it the collectionRef and not db, because the collectionRef actually tells directly this doc method which database we're using, because we got this collection (collectionRef) from calling collection where the db was already passed.
     batch.set(docRef, object);
@@ -172,8 +171,8 @@ export const addColectionAndDocumentsProducts = async (
   console.log("done");
 };
 
-export const getProductsAndDocuments = async () => {
-  const collectionRef = collection(db, "products");
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "produtos");
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);

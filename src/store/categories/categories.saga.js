@@ -12,7 +12,7 @@ import { CATEGORIES_ACTION_TYPES } from "./categories.types";
 export function* fetchCategoriesAsync() {
   try {
     // Anywhere you have a function and you want to turn it into an effect you essentially use the call() keyword.
-    const categoriesArray = yield call(getCategoriesAndDocuments, "categories");
+    const categoriesArray = yield call(getCategoriesAndDocuments, "[produtos]");
     yield put(fetchCategoriesSuccess(categoriesArray));
     // dispatch(fetchCategoriesSuccess(categoriesArray));
   } catch (error) {
