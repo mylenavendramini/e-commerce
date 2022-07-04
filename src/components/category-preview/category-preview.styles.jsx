@@ -7,12 +7,14 @@ export const CategoryPreviewContainer = styled.div`
   flex-direction: column;
   margin-bottom: 30px;
   padding: 20px 0 0 0;
+  justify-content: center;
 `;
 
 export const Title = styled(Link)`
   font-size: 28px;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
   cursor: pointer;
+  padding: 20px;
 `;
 
 export const Preview = styled.div`

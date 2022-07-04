@@ -81,7 +81,7 @@ const Navigation = () => {
           />
         </LogoContainer>
         <NavLinks>
-          <NavLink to="/shop">SALE</NavLink>
+          <NavLink to="/shop">ALL</NavLink>
           <NavLink to="/shop/hats">HATS</NavLink>
           <NavLink to="/shop/bags">BAGS</NavLink>
           <NavLink to="/shop/sunglasses">SUNGLASSES</NavLink>

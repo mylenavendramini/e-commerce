@@ -66,14 +66,6 @@ const Suggestion = ({ title, products }) => {
             );
           })}
       </CategoriesContainer>
-
-      {/*<div>
-        {categories
-          .filter((_, idx) => idx < 2)
-          .map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-          </div>*/}
     </SuggestionContainer>
   );
 };

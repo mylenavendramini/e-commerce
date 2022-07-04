@@ -5,7 +5,7 @@ import { bool } from "prop-types";
 const Menu = ({ isBurgerOpen }) => {
   return (
     <StyledMenu isBurgerOpen={isBurgerOpen}>
-      <a href="/shop">SALE</a>
+      <a href="/shop">ALL</a>
       <a href="/shop/hats">HATS</a>
       <a href="/shop/bags">BAGS</a>
       <a href="/shop/sunglasses">SUNGLASSES</a>
